@@ -261,7 +261,7 @@ namespace WaterWCGUI
 
         private void clearDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (File.Exists("_databasePath"))
+            if (File.Exists(_databasePath))
                 File.Delete(_databasePath);
 
             lstWater.Items.Clear();
