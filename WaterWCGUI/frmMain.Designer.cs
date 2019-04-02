@@ -67,7 +67,6 @@
             this.lstWC.Name = "lstWC";
             this.lstWC.Size = new System.Drawing.Size(120, 342);
             this.lstWC.TabIndex = 3;
-            this.lstWC.SelectedIndexChanged += new System.EventHandler(this.lstWC_SelectedIndexChanged);
             this.lstWC.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lstWC_MouseDown);
             // 
             // rightClickMenuWC
@@ -93,6 +92,7 @@
             // 
             // deleteRecordToolStripMenuItem
             // 
+            this.deleteRecordToolStripMenuItem.Image = global::WaterWCGUI.Properties.Resources.rubbishBin;
             this.deleteRecordToolStripMenuItem.Name = "deleteRecordToolStripMenuItem";
             this.deleteRecordToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.deleteRecordToolStripMenuItem.Text = "Delete WC Record";
@@ -126,7 +126,6 @@
             this.lstWater.Name = "lstWater";
             this.lstWater.Size = new System.Drawing.Size(120, 342);
             this.lstWater.TabIndex = 6;
-            this.lstWater.SelectedIndexChanged += new System.EventHandler(this.lstWater_SelectedIndexChanged);
             this.lstWater.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lstWater_MouseDown);
             // 
             // rightClickMenuWater
@@ -152,6 +151,7 @@
             // 
             // deleteWaterRecordToolStripMenuItem
             // 
+            this.deleteWaterRecordToolStripMenuItem.Image = global::WaterWCGUI.Properties.Resources.rubbishBin;
             this.deleteWaterRecordToolStripMenuItem.Name = "deleteWaterRecordToolStripMenuItem";
             this.deleteWaterRecordToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.deleteWaterRecordToolStripMenuItem.Text = "Delete Water Record";
@@ -201,7 +201,6 @@
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             this.toolsToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
-            this.toolsToolStripMenuItem.MouseHover += new System.EventHandler(this.settingToolStripMenuItem_MouseHover);
             // 
             // deselectListsToolStripMenuItem
             // 
@@ -217,6 +216,7 @@
             // 
             // deleteSelectedWaterToolStripMenuItem
             // 
+            this.deleteSelectedWaterToolStripMenuItem.Enabled = false;
             this.deleteSelectedWaterToolStripMenuItem.Image = global::WaterWCGUI.Properties.Resources.rubbishBin;
             this.deleteSelectedWaterToolStripMenuItem.Name = "deleteSelectedWaterToolStripMenuItem";
             this.deleteSelectedWaterToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
@@ -225,6 +225,7 @@
             // 
             // deleteSelectedWCToolStripMenuItem
             // 
+            this.deleteSelectedWCToolStripMenuItem.Enabled = false;
             this.deleteSelectedWCToolStripMenuItem.Image = global::WaterWCGUI.Properties.Resources.rubbishBin;
             this.deleteSelectedWCToolStripMenuItem.Name = "deleteSelectedWCToolStripMenuItem";
             this.deleteSelectedWCToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
@@ -255,8 +256,8 @@
             // goToWebsiteToolStripMenuItem
             // 
             this.goToWebsiteToolStripMenuItem.Name = "goToWebsiteToolStripMenuItem";
-            this.goToWebsiteToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.goToWebsiteToolStripMenuItem.Text = "Go to Website";
+            this.goToWebsiteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.goToWebsiteToolStripMenuItem.Text = "Go to GitHub Page";
             this.goToWebsiteToolStripMenuItem.Click += new System.EventHandler(this.goToWebsiteToolStripMenuItem_Click);
             // 
             // frmMain
@@ -278,7 +279,6 @@
             this.Name = "frmMain";
             this.Text = "Water&WC";
             this.Load += new System.EventHandler(this.frmMain_Load);
-            this.Shown += new System.EventHandler(this.frmMain_Shown);
             this.rightClickMenuWC.ResumeLayout(false);
             this.rightClickMenuWater.ResumeLayout(false);
             this.mainMenu.ResumeLayout(false);
