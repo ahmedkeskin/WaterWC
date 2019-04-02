@@ -71,11 +71,31 @@ namespace WaterWCGUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] RobotoCondensed_Bold {
+            get {
+                object obj = ResourceManager.GetObject("RobotoCondensed_Bold", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] RobotoCondensed_Regular {
+            get {
+                object obj = ResourceManager.GetObject("RobotoCondensed_Regular", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap rubbish_bin {
+        internal static System.Drawing.Bitmap rubbishBin {
             get {
-                object obj = ResourceManager.GetObject("rubbish-bin", resourceCulture);
+                object obj = ResourceManager.GetObject("rubbishBin", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Security.Policy;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
@@ -18,11 +20,17 @@ namespace WaterWCGUI
 {
     public partial class frmMain : Form
     {
+        private delegate void SetFontsAfterLoadingForm();
+        private SetFontsAfterLoadingForm myFonts;
+
         private List<Water> WaterList = new List<Water>();
         private List<WC> WCList = new List<WC>();
         private int _sumWC=0;
         private double _sumWater=0;
         private string _databasePath= "database.xml";
+
+        private Font _regularFont;
+        private Font _BoldFont;
         public frmMain()
         {
             InitializeComponent();
@@ -169,13 +177,43 @@ namespace WaterWCGUI
         private void CalculateSumOfWC()
         {
             _sumWC = WCList.Count;
-            lblWC.Text = _sumWC.ToString() + " Times";
+            string _times = "Time";
+            if (_sumWC > 1)
+            {
+                _times = "Times";
+            }
+            lblWC.Text = _sumWC.ToString() +" "+ _times;
         }
 
+        private void LoadFonts()
+        {
+            PrivateFontCollection privateFontCollection = new PrivateFontCollection();
+
+            privateFontCollection.AddFontFile(@"res\RobotoCondensed-Regular.ttf");
+            privateFontCollection.AddFontFile(@"res\RobotoCondensed-Bold.ttf");
+
+            _regularFont = new Font(privateFontCollection.Families[0], 11, FontStyle.Regular);
+            _BoldFont = new Font(privateFontCollection.Families[0], 16, FontStyle.Bold);
+
+        }
+
+        private  void SetFonts()
+        {
+            lstWC.Font = _regularFont;
+            lstWater.Font = _regularFont;
+
+            lblWC.Font = _BoldFont;
+            lblWater.Font = _BoldFont;
+
+            btnWC.Font = _BoldFont;
+            btnWater.Font = _BoldFont;
+        }
         private void frmMain_Load(object sender, EventArgs e)
         {
+            LoadFonts();
             LoadData();
             InstallData();
+            SetFonts();
         }
 
         private void clearDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
@@ -215,8 +253,6 @@ namespace WaterWCGUI
         private void deleteSelectedWaterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DeleteWaterRecord();
-
-
         }
 
         private void DeleteWCRecord()
@@ -234,8 +270,6 @@ namespace WaterWCGUI
         private void deleteSelectedWCToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DeleteWCRecord();
-
-
         }
 
         private void settingToolStripMenuItem_Click(object sender, EventArgs e)
@@ -311,11 +345,6 @@ namespace WaterWCGUI
             DeleteWCRecord();
         }
 
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void deselectWaterRecordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             lstWater.ClearSelected();
@@ -329,6 +358,24 @@ namespace WaterWCGUI
         private void lstWater_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void frmMain_Shown(object sender, EventArgs e)
+        {
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            lstWC.Font = _regularFont;
+            lstWater.Font = _regularFont;
+
+            lblWC.Font = _BoldFont;
+            lblWater.Font = _BoldFont;
+
+            btnWC.Font = _BoldFont;
+            btnWater.Font = _BoldFont;
+            this.Update();
+            
         }
     }
 
