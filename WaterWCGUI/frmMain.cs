@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Windows.Forms;
 using System.Xml;
+
 namespace WaterWCGUI
 {
     public partial class frmMain : Form
     {
         private List<Water> WaterList = new List<Water>();
         private List<WC> WCList = new List<WC>();
-        private int _sumWc=0;
-        private double _sumWater=0;
-        private string _databasePath= "database.xml";
+        private int _sumWc = 0;
+        private double _sumWater = 0;
+        private string _databasePath = "database.xml";
+        private bool _isShownTrayIconBalloon = false;
 
-        private Font _regularFont;
-        private Font _boldFont;
         public frmMain()
         {
             InitializeComponent();
@@ -36,8 +35,8 @@ namespace WaterWCGUI
                 DateTime time;
                 DateTime.TryParse(record.Attributes["Time"].Value, out time);
                 WaterList.Add(new Water(time, Convert.ToDouble(record.InnerText)));
-
             }
+
             foreach (XmlNode record in xmlDocument.ChildNodes[1].ChildNodes[1].ChildNodes)
             {
                 DateTime time;
@@ -45,10 +44,11 @@ namespace WaterWCGUI
                 WCList.Add(new WC(time));
             }
         }
+
         private void LoadData()
         {
-            if(File.Exists(_databasePath))
-            LoadDatafromXML();
+            if (File.Exists(_databasePath))
+                LoadDatafromXML();
         }
 
         private void InstallData()
@@ -70,6 +70,7 @@ namespace WaterWCGUI
         private void SaveData()
         {
             XmlWriter xmlWriter = XmlWriter.Create(_databasePath);
+
             xmlWriter.WriteStartDocument();
             xmlWriter.WriteStartElement("database");
             xmlWriter.WriteStartElement("WaterList");
@@ -79,8 +80,8 @@ namespace WaterWCGUI
                 xmlWriter.WriteAttributeString("Time", waterRecord.Time.ToString("HH:mm:ss"));
                 xmlWriter.WriteString(waterRecord.Amount.ToString());
                 xmlWriter.WriteEndElement();
-
             }
+
             xmlWriter.WriteEndElement();
             xmlWriter.WriteStartElement("WCList");
             foreach (WC wcRecord in WCList)
@@ -89,11 +90,12 @@ namespace WaterWCGUI
                 xmlWriter.WriteString(wcRecord.Time.ToString("HH:mm:ss"));
                 xmlWriter.WriteEndElement();
             }
+
             xmlWriter.WriteEndElement();
             xmlWriter.WriteEndDocument();
             xmlWriter.Close();
-            
         }
+
         private void AddWater(Water water)
         {
             WaterList.Add(water);
@@ -116,6 +118,7 @@ namespace WaterWCGUI
             {
                 _sumWater += waterRecord.Amount;
             }
+
             lblWater.Text = _sumWater.ToString() + " lt.\n in " + lstWater.Items.Count.ToString();
         }
 
@@ -124,6 +127,7 @@ namespace WaterWCGUI
             CalculateSumOfWater();
             CalculateSumOfWC();
         }
+
         private void CalculateSumOfWC()
         {
             _sumWc = WCList.Count;
@@ -132,32 +136,24 @@ namespace WaterWCGUI
             {
                 _times = "Times";
             }
+
             lblWC.Text = _sumWc.ToString() + " " + _times;
         }
 
-        private void LoadFonts()
-        {
-            PrivateFontCollection privateFontCollection = new PrivateFontCollection();
-
-            privateFontCollection.AddFontFile(@"res\RobotoCondensed-Regular.ttf");
-            privateFontCollection.AddFontFile(@"res\RobotoCondensed-Bold.ttf");
-
-            _regularFont = new Font(privateFontCollection.Families[0], 11, FontStyle.Regular);
-            _boldFont = new Font(privateFontCollection.Families[0], 16, FontStyle.Bold);
-
-        }
+        
 
         private void SetFonts()
         {
-            lstWC.Font = _regularFont;
-            lstWater.Font = _regularFont;
+            lstWC.Font = SpecialFont.GetFonts().RegularFont;
+            lstWater.Font = SpecialFont.GetFonts().RegularFont;
 
-            lblWC.Font = _boldFont;
-            lblWater.Font = _boldFont;
+            lblWC.Font = SpecialFont.GetFonts().BoldFont;
+            lblWater.Font = SpecialFont.GetFonts().BoldFont;
 
-            btnWC.Font = _boldFont;
-            btnWater.Font = _boldFont;
+            btnWC.Font = SpecialFont.GetFonts().BoldFont;
+            btnWater.Font = SpecialFont.GetFonts().BoldFont;
         }
+
         private void DeleteWaterRecord()
         {
             if (lstWater.SelectedIndex > -1)
@@ -169,6 +165,7 @@ namespace WaterWCGUI
                 SaveData();
             }
         }
+
         private void DeleteWCRecord()
         {
             if (lstWC.SelectedIndex > -1)
@@ -180,6 +177,7 @@ namespace WaterWCGUI
                 SaveData();
             }
         }
+
         private void ShowHideMenuItem()
         {
             if (lstWater.SelectedIndex > -1)
@@ -193,7 +191,6 @@ namespace WaterWCGUI
 
             if (lstWC.SelectedIndex > -1)
             {
-
                 deleteSelectedWCToolStripMenuItem.Enabled = true;
             }
             else
@@ -201,47 +198,62 @@ namespace WaterWCGUI
                 deleteSelectedWCToolStripMenuItem.Enabled = false;
             }
         }
-        private void btnWC_Click(object sender, EventArgs e)
+
+        private void GoToWC()
         {
             //Urination
             WC wc = new WC(DateTime.Now);
             if (WCList.Count == 0)
             {
                 AddWC(wc);
+                PlaySoundEffect();
             }
             else
             {
                 if (WCList.Last().Time.ToString("HH:mm:ss") != wc.Time.ToString("HH:mm:ss"))
                 {
                     AddWC(wc);
+                    PlaySoundEffect();
                 }
             }
-            
+
             SaveData();
         }
 
-        
-        private void btnWater_Click(object sender, EventArgs e)
+        private void btnWC_Click(object sender, EventArgs e)
+        {
+            GoToWC();
+        }
+
+        private void DrinkWater()
         {
             //Drink a cup of water
             Water water = new Water(DateTime.Now, 0.2);
             if (WaterList.Count == 0)
             {
                 AddWater(water);
+                PlaySoundEffect();
             }
             else
             {
                 if (WaterList.Last().Time.ToString("HH:mm:ss") != water.Time.ToString("HH:mm:ss"))
                 {
                     AddWater(water);
+                    PlaySoundEffect();
                 }
             }
-            
+
+            SaveData();
+        }
+
+        private void btnWater_Click(object sender, EventArgs e)
+        {
+            DrinkWater();
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            LoadFonts();
+
             LoadData();
             InstallData();
             SetFonts();
@@ -249,8 +261,8 @@ namespace WaterWCGUI
 
         private void clearDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(File.Exists("_databasePath"))
-            File.Delete(_databasePath);
+            if (File.Exists("_databasePath"))
+                File.Delete(_databasePath);
 
             lstWater.Items.Clear();
             lstWC.Items.Clear();
@@ -261,39 +273,32 @@ namespace WaterWCGUI
             WCList.Clear();
             _sumWc = 0;
             _sumWater = 0;
-
         }
 
         private void goToWebsiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/ahmedkeskin/WaterWC/");
-
         }
-        
+
         private void deleteSelectedWaterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DeleteWaterRecord();
         }
-        
+
 
         private void deleteSelectedWCToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DeleteWCRecord();
         }
 
-        private void settingToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowHideMenuItem();
-        }
 
-        
         private void lstWater_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Middle)
             {
                 lstWater.ClearSelected();
-
             }
+
             lstWC.ClearSelected();
             ShowHideMenuItem();
         }
@@ -301,11 +306,11 @@ namespace WaterWCGUI
 
         private void lstWC_MouseDown(object sender, MouseEventArgs e)
         {
-
             if (e.Button == MouseButtons.Middle)
             {
                 lstWC.ClearSelected();
             }
+
             lstWater.ClearSelected();
             ShowHideMenuItem();
         }
@@ -337,25 +342,76 @@ namespace WaterWCGUI
             DeleteWaterRecord();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void wCToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            lstWC.Font = _regularFont;
-            lstWater.Font = _regularFont;
-
-            lblWC.Font = _boldFont;
-            lblWater.Font = _boldFont;
-
-            btnWC.Font = _boldFont;
-            btnWater.Font = _boldFont;
-            this.Update();
-            
+            GoToWC();
         }
 
-        private void toolStripTextBox1_Click(object sender, EventArgs e)
+        private void systemTrayMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            txtLastWC.Text = "Last WC: " + WCList[WCList.Count() - 1].Time.ToString("HH:mm:ss");
+            txtLastWater.Text = "Last Water: " + WaterList[WaterList.Count() - 1].Time.ToString("HH:mm:ss");
+        }
 
+        private void waterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DrinkWater();
+        }
+
+        private void frmMain_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                Hide();
+                systemTrayIcon.BalloonTipText =
+                    "You could use here to add something. \n To open the menu please click right button.";
+                systemTrayIcon.Visible = true;
+                if (!_isShownTrayIconBalloon)
+                {
+                    systemTrayIcon.ShowBalloonTip(1000);
+                    _isShownTrayIconBalloon = true;
+                }
+            }
+
+            if (WindowState == FormWindowState.Normal)
+            {
+                systemTrayIcon.Visible = false;
+            }
+        }
+
+        private void ShowMainForm()
+        {
+            Show();
+            WindowState = FormWindowState.Normal;
+        }
+
+        private void systemTrayIcon_DoubleClick(object sender, EventArgs e)
+        {
+            ShowMainForm();
+        }
+
+        private void btnQuit_Click(object sender, EventArgs e)
+        {
+            systemTrayIcon.Visible = false;
+            Application.Exit();
+        }
+
+        private void btnShowMainForm_Click(object sender, EventArgs e)
+        {
+            ShowMainForm();
+        }
+
+        private void PlaySoundEffect()
+        {
+            if (chkSoundEffects.Checked)
+            {
+                SystemSounds.Beep.Play();
+            }
+        }
+
+        private void toolsToolStripMenuItem_MouseDown(object sender, MouseEventArgs e)
+        {
+            ShowHideMenuItem();
         }
     }
-
 }
-

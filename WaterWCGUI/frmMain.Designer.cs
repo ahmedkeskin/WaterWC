@@ -54,9 +54,23 @@
             this.clearDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.goToWebsiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.systemTrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.systemTrayMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btnShowMainForm = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.txtLastWater = new System.Windows.Forms.ToolStripTextBox();
+            this.txtLastWC = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.waterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnQuit = new System.Windows.Forms.ToolStripMenuItem();
+            this.chkSoundEffects = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.rightClickMenuWC.SuspendLayout();
             this.rightClickMenuWater.SuspendLayout();
             this.mainMenu.SuspendLayout();
+            this.systemTrayMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // lstWC
@@ -196,11 +210,13 @@
             this.deleteSelectedWaterToolStripMenuItem,
             this.deleteSelectedWCToolStripMenuItem,
             this.toolStripSeparator2,
+            this.chkSoundEffects,
+            this.toolStripSeparator8,
             this.clearDatabaseToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
-            this.toolsToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
+            this.toolsToolStripMenuItem.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolsToolStripMenuItem_MouseDown);
             // 
             // deselectListsToolStripMenuItem
             // 
@@ -256,9 +272,110 @@
             // goToWebsiteToolStripMenuItem
             // 
             this.goToWebsiteToolStripMenuItem.Name = "goToWebsiteToolStripMenuItem";
-            this.goToWebsiteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.goToWebsiteToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.goToWebsiteToolStripMenuItem.Text = "Go to GitHub Page";
             this.goToWebsiteToolStripMenuItem.Click += new System.EventHandler(this.goToWebsiteToolStripMenuItem_Click);
+            // 
+            // systemTrayIcon
+            // 
+            this.systemTrayIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.systemTrayIcon.BalloonTipText = "You could use here to add something. \\n To open the menu please click right butto" +
+    "n.";
+            this.systemTrayIcon.BalloonTipTitle = "Water&WC";
+            this.systemTrayIcon.ContextMenuStrip = this.systemTrayMenu;
+            this.systemTrayIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("systemTrayIcon.Icon")));
+            this.systemTrayIcon.Text = "Water&WC";
+            this.systemTrayIcon.DoubleClick += new System.EventHandler(this.systemTrayIcon_DoubleClick);
+            // 
+            // systemTrayMenu
+            // 
+            this.systemTrayMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnShowMainForm,
+            this.toolStripSeparator7,
+            this.txtLastWater,
+            this.txtLastWC,
+            this.toolStripSeparator5,
+            this.waterToolStripMenuItem,
+            this.wCToolStripMenuItem,
+            this.toolStripSeparator6,
+            this.btnQuit});
+            this.systemTrayMenu.Name = "systemTrayMenu";
+            this.systemTrayMenu.Size = new System.Drawing.Size(186, 160);
+            this.systemTrayMenu.Opening += new System.ComponentModel.CancelEventHandler(this.systemTrayMenu_Opening);
+            // 
+            // btnShowMainForm
+            // 
+            this.btnShowMainForm.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnShowMainForm.Name = "btnShowMainForm";
+            this.btnShowMainForm.Size = new System.Drawing.Size(185, 22);
+            this.btnShowMainForm.Text = "Show Water&WC";
+            this.btnShowMainForm.Click += new System.EventHandler(this.btnShowMainForm_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(182, 6);
+            // 
+            // txtLastWater
+            // 
+            this.txtLastWater.Name = "txtLastWater";
+            this.txtLastWater.ReadOnly = true;
+            this.txtLastWater.Size = new System.Drawing.Size(125, 23);
+            this.txtLastWater.Text = "Last Water:";
+            // 
+            // txtLastWC
+            // 
+            this.txtLastWC.Name = "txtLastWC";
+            this.txtLastWC.ReadOnly = true;
+            this.txtLastWC.Size = new System.Drawing.Size(125, 23);
+            this.txtLastWC.Text = "Last WC:";
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(182, 6);
+            // 
+            // waterToolStripMenuItem
+            // 
+            this.waterToolStripMenuItem.Name = "waterToolStripMenuItem";
+            this.waterToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.waterToolStripMenuItem.Text = "Drink Water";
+            this.waterToolStripMenuItem.Click += new System.EventHandler(this.waterToolStripMenuItem_Click);
+            // 
+            // wCToolStripMenuItem
+            // 
+            this.wCToolStripMenuItem.Name = "wCToolStripMenuItem";
+            this.wCToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.wCToolStripMenuItem.Text = "Go to the WC";
+            this.wCToolStripMenuItem.Click += new System.EventHandler(this.wCToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(182, 6);
+            // 
+            // btnQuit
+            // 
+            this.btnQuit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuit.Image = global::WaterWCGUI.Properties.Resources.logout;
+            this.btnQuit.Name = "btnQuit";
+            this.btnQuit.Size = new System.Drawing.Size(185, 22);
+            this.btnQuit.Text = "Quit";
+            this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
+            // 
+            // chkSoundEffects
+            // 
+            this.chkSoundEffects.Checked = true;
+            this.chkSoundEffects.CheckOnClick = true;
+            this.chkSoundEffects.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSoundEffects.Name = "chkSoundEffects";
+            this.chkSoundEffects.Size = new System.Drawing.Size(188, 22);
+            this.chkSoundEffects.Text = "Sound Effects";
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(185, 6);
             // 
             // frmMain
             // 
@@ -279,10 +396,13 @@
             this.Name = "frmMain";
             this.Text = "Water&WC";
             this.Load += new System.EventHandler(this.frmMain_Load);
+            this.Resize += new System.EventHandler(this.frmMain_Resize);
             this.rightClickMenuWC.ResumeLayout(false);
             this.rightClickMenuWater.ResumeLayout(false);
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
+            this.systemTrayMenu.ResumeLayout(false);
+            this.systemTrayMenu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -314,6 +434,19 @@
         private System.Windows.Forms.ToolStripMenuItem deselectWaterRecordToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem deleteWaterRecordToolStripMenuItem;
+        private System.Windows.Forms.NotifyIcon systemTrayIcon;
+        private System.Windows.Forms.ContextMenuStrip systemTrayMenu;
+        private System.Windows.Forms.ToolStripMenuItem waterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem wCToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox txtLastWater;
+        private System.Windows.Forms.ToolStripTextBox txtLastWC;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem btnQuit;
+        private System.Windows.Forms.ToolStripMenuItem btnShowMainForm;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem chkSoundEffects;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
     }
 }
 
