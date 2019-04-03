@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace WaterWCGUI
+using WaterWc.Entities.Abstract;
+
+namespace WaterWc.Entities.Concrete
 {
-    class WC
+    public class Wc:IEntity
     {
         public DateTime Time { get; set; }
         public string Text { get; set; }
 
-        public WC(DateTime time)
+        public Wc(DateTime time)
         {
             Time = time;
             Text = Time.ToString("HH:mm:ss");

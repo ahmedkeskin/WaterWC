@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace WaterWCGUI
+using WaterWc.Entities.Abstract;
+
+namespace WaterWc.Entities.Concrete
 {
-    class Water
+    public class Water:IEntity
     {
         public DateTime Time { get; set; }
         public double Amount { get; set; } //Liter type
