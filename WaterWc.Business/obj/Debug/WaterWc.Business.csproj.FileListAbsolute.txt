@@ -1,0 +1,13 @@
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.Business\bin\Debug\WaterWc.Business.dll
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.Business\bin\Debug\WaterWc.Business.pdb
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.Business\bin\Debug\Ninject.dll
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.Business\bin\Debug\WaterWc.DataAccess.dll
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.Business\bin\Debug\WaterWc.Entities.dll
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.Business\bin\Debug\WaterWc.DataAccess.pdb
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.Business\bin\Debug\WaterWc.Entities.pdb
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.Business\bin\Debug\Ninject.xml
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.Business\obj\Debug\WaterWc.Business.csprojAssemblyReference.cache
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.Business\obj\Debug\WaterWc.Business.csproj.CoreCompileInputs.cache
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.Business\obj\Debug\WaterWc.Business.csproj.CopyComplete
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.Business\obj\Debug\WaterWc.Business.dll
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.Business\obj\Debug\WaterWc.Business.pdb

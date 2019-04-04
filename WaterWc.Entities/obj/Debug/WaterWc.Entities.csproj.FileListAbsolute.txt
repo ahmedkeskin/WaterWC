@@ -1,0 +1,5 @@
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.Entities\bin\Debug\WaterWc.Entities.dll
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.Entities\bin\Debug\WaterWc.Entities.pdb
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.Entities\obj\Debug\WaterWc.Entities.csproj.CoreCompileInputs.cache
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.Entities\obj\Debug\WaterWc.Entities.dll
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.Entities\obj\Debug\WaterWc.Entities.pdb

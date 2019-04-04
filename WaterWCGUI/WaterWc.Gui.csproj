@@ -92,10 +92,10 @@
     <None Include="res\logout.png" />
     <None Include="res\database.png" />
     <None Include="res\RobotoCondensed-Bold.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="res\RobotoCondensed-Regular.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="res\rubbish-bin.png" />
   </ItemGroup>

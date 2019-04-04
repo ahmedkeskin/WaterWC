@@ -149,7 +149,7 @@
             this.toolStripSeparator4,
             this.deleteWaterRecordToolStripMenuItem});
             this.rightClickMenuWater.Name = "rightClickMenuWater";
-            this.rightClickMenuWater.Size = new System.Drawing.Size(193, 76);
+            this.rightClickMenuWater.Size = new System.Drawing.Size(193, 54);
             // 
             // deselectWaterRecordToolStripMenuItem
             // 
@@ -314,7 +314,7 @@
             this.toolStripSeparator6,
             this.btnQuit});
             this.systemTrayMenu.Name = "systemTrayMenu";
-            this.systemTrayMenu.Size = new System.Drawing.Size(186, 160);
+            this.systemTrayMenu.Size = new System.Drawing.Size(186, 182);
             this.systemTrayMenu.Opening += new System.ComponentModel.CancelEventHandler(this.systemTrayMenu_Opening);
             // 
             // btnShowMainForm
@@ -377,7 +377,7 @@
             this.btnQuit.Text = "Quit";
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
-            // frmMain
+            // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

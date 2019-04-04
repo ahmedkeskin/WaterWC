@@ -282,8 +282,8 @@ namespace WaterWc.Gui
         private void systemTrayMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
 
-            txtLastWC.Text = _lastWc + _waterService.GetAll().LastOrDefault()?.Time.ToString(("HH:mm:ss"));
-            txtLastWater.Text = _lastWater + _wcService.GetAll().LastOrDefault()?.Time.ToString(("HH:mm:ss"));
+            txtLastWC.Text = _lastWc + _wcService.GetAll().LastOrDefault()?.Time.ToString(("HH:mm:ss"));
+            txtLastWater.Text = _lastWater + _waterService.GetAll().LastOrDefault()?.Time.ToString(("HH:mm:ss"));
         }
 
 

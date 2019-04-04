@@ -1,0 +1,9 @@
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.DataAccess\bin\Debug\WaterWc.DataAccess.dll
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.DataAccess\bin\Debug\WaterWc.DataAccess.pdb
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.DataAccess\bin\Debug\WaterWc.Entities.dll
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.DataAccess\bin\Debug\WaterWc.Entities.pdb
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.DataAccess\obj\Debug\WaterWc.DataAccess.csprojAssemblyReference.cache
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.DataAccess\obj\Debug\WaterWc.DataAccess.csproj.CoreCompileInputs.cache
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.DataAccess\obj\Debug\WaterWc.DataAccess.csproj.CopyComplete
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.DataAccess\obj\Debug\WaterWc.DataAccess.dll
+D:\AhmedKeskin\ProjectsSoftware\WaterWC\WaterWc.DataAccess\obj\Debug\WaterWc.DataAccess.pdb
