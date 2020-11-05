@@ -15,6 +15,7 @@ namespace WaterWc.Business.DependencyResolvers.Ninject
 
             Bind<IWcService>().To<WcManager>();
             Bind<IWcDal>().To<XmlWcDal>();
+            Bind<IDbService>().To<DbManager>();
         }
     }
 }

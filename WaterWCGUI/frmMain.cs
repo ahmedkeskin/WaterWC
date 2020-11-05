@@ -14,6 +14,7 @@ namespace WaterWc.Gui
         //Business Layer declaration
         private readonly IWaterService _waterService;
         private readonly IWcService _wcService;
+        private readonly IDbService _dbService;
 
         //Magic strings
         private readonly string _emptyWc = "0 Time";
@@ -22,11 +23,11 @@ namespace WaterWc.Gui
         private readonly string _in = "in ";
         private readonly string _lastWc = "Last WC: ";
         private readonly string _lastWater = "Last Water: ";
-        
+
         //Results of sum
         private int _sumWc;
         private double _sumWater;
-        
+
         //System tray settings
         private bool _isShownTrayIconBalloon;
         private readonly string _tipText = "You could use here to add something. \n To open the menu please click right button.";
@@ -34,27 +35,35 @@ namespace WaterWc.Gui
         public FrmMain()
         {
             InitializeComponent();
-            
+
             //Ninject operation
             _waterService = NinjectInstanceFactory.GetInstance<IWaterService>();
             _wcService = NinjectInstanceFactory.GetInstance<IWcService>();
+            _dbService = NinjectInstanceFactory.GetInstance<IDbService>();
         }
 
         //Gets data from business layer and installs to fields of form components.
         private void LoadData()
         {
-            foreach (var waterRecord in _waterService.GetAll())
+            try
             {
-                lstWater.Items.Add(waterRecord.Text);
-            }
+                foreach (var waterRecord in _waterService.GetAll())
+                {
+                    lstWater.Items.Add(waterRecord.Text);
+                }
 
-            foreach (var wcRecord in _wcService.GetAll())
+                foreach (var wcRecord in _wcService.GetAll())
+                {
+                    lstWc.Items.Add(wcRecord.Text);
+                }
+
+                CalculateSumOfWater();
+                CalculateSumOfWc();
+            }
+            catch (Exception exception)
             {
-                lstWc.Items.Add(wcRecord.Text);
+                systemTrayIcon.ShowBalloonTip(1000, "Fail", exception.Message, ToolTipIcon.Warning);
             }
-
-            CalculateSumOfWater();
-            CalculateSumOfWc();
         }
 
         private void AddWater(Water water)
@@ -79,7 +88,7 @@ namespace WaterWc.Gui
                 _sumWater += record.Amount;
             }
 
-            lblWater.Text =_sumWater + _shortLiter + Environment.NewLine + _in + lstWater.Items.Count;
+            lblWater.Text = _sumWater + _shortLiter + Environment.NewLine + _in + lstWater.Items.Count;
         }
 
 
@@ -193,8 +202,14 @@ namespace WaterWc.Gui
         private void frmMain_Load(object sender, EventArgs e)
         {
 
+            CheckDb();
             LoadData();
             SetFonts();
+        }
+
+        private void CheckDb()
+        {
+            _dbService.CheckDbExist();
         }
 
         private void clearDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
@@ -214,10 +229,10 @@ namespace WaterWc.Gui
             _sumWater = 0;
             lblWC.Text = _emptyWc;
             lblWater.Text = _emptyWater;
-            
+
         }
 
-        
+
         private void goToWebsiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/ahmedkeskin/WaterWC/");
@@ -291,7 +306,7 @@ namespace WaterWc.Gui
         {
             DrinkWater();
         }
-        
+
         private void frmMain_Resize(object sender, EventArgs e)
         {
             if (WindowState == FormWindowState.Minimized)
@@ -358,5 +373,18 @@ namespace WaterWc.Gui
             ShowHideMenuItem();
         }
 
+        private void newDayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _dbService.GetNewDay();
+                systemTrayIcon.ShowBalloonTip(1000, "Sucess", "New day was created!", ToolTipIcon.Info);
+
+            }
+            catch (Exception exception)
+            {
+                systemTrayIcon.ShowBalloonTip(5000, "Fail", exception.Message, ToolTipIcon.Error);
+            }
+        }
     }
 }

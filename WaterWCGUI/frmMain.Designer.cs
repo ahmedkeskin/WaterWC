@@ -67,6 +67,7 @@
             this.wCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.btnQuit = new System.Windows.Forms.ToolStripMenuItem();
+            this.newDayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rightClickMenuWC.SuspendLayout();
             this.rightClickMenuWater.SuspendLayout();
             this.mainMenu.SuspendLayout();
@@ -212,9 +213,10 @@
             this.toolStripSeparator2,
             this.chkSoundEffects,
             this.toolStripSeparator8,
+            this.newDayToolStripMenuItem,
             this.clearDatabaseToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             this.toolsToolStripMenuItem.MouseDown += new System.Windows.Forms.MouseEventHandler(this.toolsToolStripMenuItem_MouseDown);
             // 
@@ -314,7 +316,7 @@
             this.toolStripSeparator6,
             this.btnQuit});
             this.systemTrayMenu.Name = "systemTrayMenu";
-            this.systemTrayMenu.Size = new System.Drawing.Size(186, 182);
+            this.systemTrayMenu.Size = new System.Drawing.Size(186, 160);
             this.systemTrayMenu.Opening += new System.ComponentModel.CancelEventHandler(this.systemTrayMenu_Opening);
             // 
             // btnShowMainForm
@@ -376,6 +378,13 @@
             this.btnQuit.Size = new System.Drawing.Size(185, 22);
             this.btnQuit.Text = "Quit";
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
+            // 
+            // newDayToolStripMenuItem
+            // 
+            this.newDayToolStripMenuItem.Name = "newDayToolStripMenuItem";
+            this.newDayToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.newDayToolStripMenuItem.Text = "New Day";
+            this.newDayToolStripMenuItem.Click += new System.EventHandler(this.newDayToolStripMenuItem_Click);
             // 
             // FrmMain
             // 
@@ -447,6 +456,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem chkSoundEffects;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripMenuItem newDayToolStripMenuItem;
     }
 }
 
